@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:CARS_Triggers"
+             x:Class="CARS_Triggers.MainPage"	
+             BackgroundColor="LightBlue">
+
+
+    <Grid>
+        
+            <Entry Placeholder="enter name"
+                   Margin="0,350,0,400">
+        <Entry.Triggers>
+            <Trigger TargetType="Entry"
+                 Property="IsFocused" Value="True">
+                <Setter Property="BackgroundColor" Value="Yellow" />
+                <!-- multiple Setters elements are allowed -->
+            </Trigger>
+        </Entry.Triggers>
+        </Entry>
+
+        <Button Text            ="Click here"
+                BackgroundColor ="#A569BD"
+                TextColor       ="White"
+                Margin="0,50,0,700">
+            <Button.Triggers>
+                <EventTrigger Event="Clicked">
+                    <local:BotonTrigger />
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+
+        <Slider
+         x:Name="SliderTriggers"
+         Minimum="0"
+         Maximum="100"
+         Value="50"
+            Margin="0,200,0,600">
+            <Slider.Triggers>
+                <EventTrigger Event="ValueChanged">
+                    <local:Deslizadorcolor/>
+                </EventTrigger>
+            </Slider.Triggers>
+            
+        </Slider>
+
+        <Entry  x:Name     ="UserEntry" 
+               Placeholder="inserta solo 6 letras"
+               WidthRequest ="40"
+                Margin="0,525,0,255"
+                />
+
+        <Entry  x:Name     ="FullnameEntry" 
+               Placeholder="apellido"
+               WidthRequest ="40"
+                Margin="0,575,0,200"
+                BackgroundColor="Aquamarine"
+                />
+
+        <Button Text            ="Save"
+                BackgroundColor ="#C39BD3"
+                Margin="0,725,0,50">
+            <Button.Triggers>
+                <MultiTrigger  TargetType ="Button">
+                    <MultiTrigger.Conditions>
+                        <BindingCondition Binding   ="{Binding Source={x:Reference UserEntry}, Path=Text.Length}" 
+                                          Value     ="6" />
+                        <BindingCondition Binding   ="{Binding Source={x:Reference FullnameEntry}, Path=IsFocused}" 
+                                          Value     ="True" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Text"             Value="Trigger activated" />
+                    <Setter Property="BackgroundColor"  Value="#5DADE2" />
+                </MultiTrigger>
+            </Button.Triggers>
+        </Button>
+    </Grid>
+
+
+    
+
+
+</ContentPage>
